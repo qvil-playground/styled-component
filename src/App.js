@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import "./App.css";
 import styled, { injectGlobal } from "styled-components";
 
 injectGlobal`
@@ -30,12 +29,17 @@ const Button = styled.button`
   background-color: ${props => (props.danger ? "#c0392b" : "#2ecc71")};
 `;
 
+const Anchor = Button.withComponent("a").extend`
+  text-decoration: none;
+`;
+
 class App extends Component {
   render() {
     return (
       <Container>
         <Button>Button</Button>
         <Button danger>Button</Button>
+        <Anchor href="https://www.google.co.kr/" target="_blank">Go to Google</Anchor>
       </Container>
     );
   }
