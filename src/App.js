@@ -1,18 +1,13 @@
 import React, { Component } from "react";
-import styled, { injectGlobal, css } from "styled-components";
+import styled, { injectGlobal, ThemeProvider } from "styled-components";
+import { awesomeCard } from "styles/mixin";
+import theme from "styles/theme";
 
 injectGlobal`
   body {
     padding: 0;
     margin: 0;
   }
-`;
-
-const awesomeCard = css`
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-  background-color: white;
-  border-radius: 10px;
-  padding 20px;
 `;
 
 const Container = styled.div`
@@ -22,20 +17,41 @@ const Container = styled.div`
   ${awesomeCard};
 `;
 
-const Input = styled.input.attrs({
-  required: true
-})`
-  border: none;
-  outline: none;
-  ${awesomeCard};
+const Card = styled.div`
+  background-color: white;
 `;
+
+const Button = styled.button`
+  border-radius: 30px;
+  padding: 25px 15px;
+  outline: none;
+  background-color: ${props => props.theme.color[props.color]};
+`;
+
+const Form = () => (
+  <Card>
+    <Button color="primary">Hello</Button>
+    <Button color="secondary">Hello</Button>
+    <Button color="danger">Hello</Button>
+  </Card>
+);
+
+// const Input = styled.input.attrs({
+//   required: true
+// })`
+//   border: none;
+//   outline: none;
+//   ${awesomeCard};
+// `;
 
 class App extends Component {
   render() {
     return (
-      <Container>
-        <Input placeholder="Input here" />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Form />
+        </Container>
+      </ThemeProvider>
     );
   }
 }
