@@ -1,16 +1,19 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 // import "./App.css";
-import styled from "styled-components";
+import styled, { injectGlobal } from "styled-components";
 
-// const Button = ({ danger, text }) => {
-//   return (
-//     <button
-//       className={danger ? "button button--danger" : "button button--success"}
-//     >
-//       {text || "Button"}
-//     </button>
-//   );
-// };
+injectGlobal`
+  body {
+    padding: 0;
+    margin: 0;
+  }
+`;
+
+const Container = styled.div`
+  height: 100vh;
+  width: 100%;
+  background-color: pink;
+`;
 
 const Button = styled.button`
   border-radius: 50px;
@@ -24,16 +27,16 @@ const Button = styled.button`
   &:focus {
     outline: none;
   }
-  background-color: ${props => props.danger ? "#c0392b" : "#2ecc71"};
+  background-color: ${props => (props.danger ? "#c0392b" : "#2ecc71")};
 `;
 
 class App extends Component {
   render() {
     return (
-      <Fragment>
+      <Container>
         <Button>Button</Button>
         <Button danger>Button</Button>
-      </Fragment>
+      </Container>
     );
   }
 }
