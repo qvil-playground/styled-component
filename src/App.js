@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled, { injectGlobal, keyframes } from "styled-components";
+import styled, { injectGlobal, css } from "styled-components";
 
 injectGlobal`
   body {
@@ -8,54 +8,33 @@ injectGlobal`
   }
 `;
 
+const awesomeCard = css`
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  background-color: white;
+  border-radius: 10px;
+  padding 20px;
+`;
+
 const Container = styled.div`
   height: 100vh;
   width: 100%;
   background-color: pink;
+  ${awesomeCard};
 `;
 
-const Button = styled.button`
-  border-radius: 50px;
-  padding: 5px;
-  min-width: 120px;
-  color: white;
-  font-weight: 600;
-  appearance: none;
-  cursor: pointer;
-  &:active,
-  &:focus {
-    outline: none;
-  }
-  background-color: ${props => (props.danger ? "#c0392b" : "#2ecc71")};
-  ${props => {
-    if (props.danger) {
-      return `animation: ${rotate} ${props.rotateTime}s linear infinite`;
-    }
-  }};
-`;
-
-const Anchor = Button.withComponent("a").extend`
-  text-decoration: none;
-`;
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+const Input = styled.input.attrs({
+  required: true
+})`
+  border: none;
+  outline: none;
+  ${awesomeCard};
 `;
 
 class App extends Component {
   render() {
     return (
       <Container>
-        <Button>Button</Button>
-        <Button danger rotateTime={5}>Button</Button>
-        <Anchor href="https://www.google.co.kr/" target="_blank">
-          Go to Google
-        </Anchor>
+        <Input placeholder="Input here" />
       </Container>
     );
   }
