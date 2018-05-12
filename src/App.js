@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled, { injectGlobal } from "styled-components";
+import styled, { injectGlobal, keyframes } from "styled-components";
 
 injectGlobal`
   body {
@@ -27,10 +27,24 @@ const Button = styled.button`
     outline: none;
   }
   background-color: ${props => (props.danger ? "#c0392b" : "#2ecc71")};
+  ${props => {
+    if (props.danger) {
+      return `animation: ${rotate} ${props.rotateTime}s linear infinite`;
+    }
+  }};
 `;
 
 const Anchor = Button.withComponent("a").extend`
   text-decoration: none;
+`;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 `;
 
 class App extends Component {
@@ -38,8 +52,10 @@ class App extends Component {
     return (
       <Container>
         <Button>Button</Button>
-        <Button danger>Button</Button>
-        <Anchor href="https://www.google.co.kr/" target="_blank">Go to Google</Anchor>
+        <Button danger rotateTime={5}>Button</Button>
+        <Anchor href="https://www.google.co.kr/" target="_blank">
+          Go to Google
+        </Anchor>
       </Container>
     );
   }
